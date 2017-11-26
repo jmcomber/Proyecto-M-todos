@@ -31,8 +31,11 @@ for i in file.readlines():
 A = np.matrix(A)
 b = np.transpose(np.matrix(b))
 
-R = (np.linalg.norm(np.linalg.inv(np.transpose(A) * A))**.5) * np.linalg.norm(b, ord=2)
-L = np.linalg.norm(np.transpose(A) * A) * R + np.linalg.norm(np.transpose(A)*b, ord=2)
+R = (np.linalg.norm(np.linalg.inv(A * np.transpose(A)))**.5) * np.linalg.norm(b, ord=2)
+L = np.linalg.norm(A * np.transpose(A)) * R + np.linalg.norm(np.transpose(A)*b, ord=2)
+
+print("R", R)
+print("L", L)
 
 #beta_0
 beta = np.transpose(np.matrix([1000 if i < k else 0 for i in range(p)]))
