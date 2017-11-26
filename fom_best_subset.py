@@ -12,7 +12,7 @@ def grad(beta):
 	return vector
 
 n, p = 40, 300
-k = 5
+
 
 N_ITER = 10
 
@@ -21,7 +21,7 @@ A, b = [], []
 j = 0
 for i in file.readlines():
 	if j >= 5 and j < 45:
-		line = [float(k) for k in i.strip().split(" ")]
+		line = [float(m) for m in i.strip().split(" ")]
 		A.append(line)
 	elif j > 50 and j < 91:
 		b.append(float(i))
@@ -35,30 +35,35 @@ R = (np.linalg.norm(np.linalg.inv(A * np.transpose(A)))**.5) * np.linalg.norm(b,
 L = np.linalg.norm(A * np.transpose(A)) * R + np.linalg.norm(np.transpose(A)*b, ord=2)
 
 print("R", R)
-print("L", L)
+print("L", L, "\n")
 
-#beta_0
-beta = np.transpose(np.matrix([1 if i < k else 0 for i in range(p)]))
+results = []
+for k in [5, 10, 15, 20, 100, 290]:
+	#beta_0
+	beta = np.transpose(np.matrix([1 if i < k else 0 for i in range(p)]))
 
-#no hay valor previo para calcular epsilon al principio
-prev = float('inf')
+	#no hay valor previo para calcular epsilon al principio
+	prev = float('inf')
 
-actual = np.linalg.norm(A * beta - b, ord=2) ** 2
-iteracion = 1
-while abs(actual - prev) > 10**-10: 
-	gradiente = np.transpose(np.matrix(grad(beta)))
-	c = beta - (1/L) * gradiente
-	c = c.tolist()
-	copia_ord = sorted(c, key=lambda x: abs(x[0]))
-	beta = np.matrix([c[i] if copia_ord.index(c[i]) < k else [0] for i in range(len(c))])
-	prev = actual
 	actual = np.linalg.norm(A * beta - b, ord=2) ** 2
-	print("Iteración {}: ajuste de {}, epsilon de {}".format(iteracion, actual, abs(actual - prev)))
-	iteracion += 1
-	if iteracion > N_ITER:
-		break
+	iteracion = 1
+	while abs(actual - prev) > 10**-10: 
+		gradiente = np.transpose(np.matrix(grad(beta)))
+		c = beta - (1/L) * gradiente
+		c = c.tolist()
+		copia_ord = sorted(c, key=lambda x: -abs(x[0]))
+		beta = np.matrix([c[i] if copia_ord.index(c[i]) < k else [0] for i in range(len(c))])
+		prev = actual
+		actual = np.linalg.norm(A * beta - b, ord=2) ** 2
+		# print("Iteración {}: ajuste de {}, epsilon de {}".format(iteracion, actual, abs(actual - prev)))
+		iteracion += 1
+		if iteracion > N_ITER:
+			results.append("k = {}: ajuste de {}, epsilon de {}".format(k, actual, abs(actual - prev)))
+			break
 
-beta = beta.tolist()
-for i in beta:
-	if i[0] != 0.0:
-		print(beta.index(i), i[0])
+for result in results:
+	print(result)
+# beta = beta.tolist()
+# for i in beta:
+# 	if i[0] != 0.0:
+# 		print(beta.index(i), i[0])

@@ -1,0 +1,58 @@
+N_ITER = 2000
+m =  40
+n =  300
+R =  284.59
+L =   9.0647e+005
+cpufinal =  63.625
+Caso lambda =    0.1
+
+Desajuste es 0.00756946
+Con umbral    0.7,    298 variables distintas de cero: valor optimo: 2685.53
+
+Desajuste es 0.007216
+Con umbral    0.8,    297 variables distintas de cero: valor optimo: 2765.6
+
+Desajuste es 0.00951578
+Con umbral    0.9,    254 variables distintas de cero: valor optimo: 19487.5
+
+Desajuste es 0.0210343
+Con umbral      1,    147 variables distintas de cero: valor optimo: 202346
+
+Desajuste es 0.0242565
+Con umbral    1.1,     37 variables distintas de cero: valor optimo: 645401
+
+
+Caso lambda =    0.5
+
+Desajuste es 0.00388673
+Con umbral    0.7,    298 variables distintas de cero: valor optimo: 5054.41
+
+Desajuste es 0.000160461
+Con umbral    0.8,    287 variables distintas de cero: valor optimo: 6375.16
+
+Desajuste es 0.0107392
+Con umbral    0.9,    240 variables distintas de cero: valor optimo: 32840.7
+
+Desajuste es 0.0206816
+Con umbral      1,    147 variables distintas de cero: valor optimo: 199267
+
+Desajuste es 0.0242982
+Con umbral    1.1,     48 variables distintas de cero: valor optimo: 583585
+
+
+Caso lambda =    0.7
+
+Desajuste es 0.00309415
+Con umbral    0.7,    298 variables distintas de cero: valor optimo: 6240.17
+
+Desajuste es 3.43978e-005
+Con umbral    0.8,    284 variables distintas de cero: valor optimo: 8167.85
+
+Desajuste es 0.0117799
+Con umbral    0.9,    229 variables distintas de cero: valor optimo: 44653.8
+
+Desajuste es 0.0205023
+Con umbral      1,    147 variables distintas de cero: valor optimo: 197755
+
+Desajuste es 0.0244163
+Con umbral    1.1,     53 variables distintas de cero: valor optimo: 557780
