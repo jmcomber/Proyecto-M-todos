@@ -38,7 +38,7 @@ print("R", R)
 print("L", L)
 
 #beta_0
-beta = np.transpose(np.matrix([1000 if i < k else 0 for i in range(p)]))
+beta = np.transpose(np.matrix([1 if i < k else 0 for i in range(p)]))
 
 #no hay valor previo para calcular epsilon al principio
 prev = float('inf')
@@ -47,18 +47,10 @@ actual = np.linalg.norm(A * beta - b, ord=2) ** 2
 iteracion = 1
 while abs(actual - prev) > 10**-10: 
 	gradiente = np.transpose(np.matrix(grad(beta)))
-	c = beta - (1/L**.5) * gradiente
+	c = beta - (1/L) * gradiente
 	c = c.tolist()
 	copia_ord = sorted(c, key=lambda x: abs(x[0]))
-	nuevo_beta = [copia_ord[i][0] if copia_ord.index(copia_ord[i]) < k else 0 for i in range(len(beta))]
-	copia = [0 for _ in range(len(c))]
-	for i in c:
-		if i[0] in nuevo_beta:
-			copia[c.index(i)] = i[0]
-		else:
-			copia[c.index(i)] = 0
-	# copia tiene los betas del nuevo beta, pero en las posiciones correctas
-	beta = np.transpose(np.matrix(copia))
+	beta = np.matrix([c[i] if copia_ord.index(c[i]) < k else [0] for i in range(len(c))])
 	prev = actual
 	actual = np.linalg.norm(A * beta - b, ord=2) ** 2
 	print("Iteración {}: ajuste de {}, epsilon de {}".format(iteracion, actual, abs(actual - prev)))
